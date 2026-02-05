@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For My Love Nisha ❤️</title>
+
   <style>
     body {
       margin: 0;
@@ -22,6 +23,7 @@
       text-align: center;
       display: none;
       animation: fadeIn 1s ease-in-out;
+      padding: 20px;
     }
 
     .page.active {
@@ -29,13 +31,14 @@
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      font-size: 2.4rem;
+      margin-bottom: 15px;
     }
 
     .buttons {
       margin-top: 30px;
       position: relative;
+      height: 80px;
     }
 
     button {
@@ -62,19 +65,41 @@
       background: #ffffff;
       color: #ff3366;
       position: absolute;
+      left: 120px;
     }
 
-    /* Page 2 */
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* GIF */
     .gif {
-      width: 250px;
+      width: 230px;
       border-radius: 20px;
-      margin: 20px 0;
+      margin: 15px 0;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
 
     .message {
-      font-size: 1.5rem;
-      margin-top: 15px;
+      font-size: 1.4rem;
+      margin-top: 10px;
+      line-height: 1.6;
     }
 
     /* Confetti */
@@ -97,9 +122,23 @@
         transform: translateY(110vh) rotate(360deg);
       }
     }
+
+    .nextBtn {
+      margin-top: 20px;
+      background: #ffffff;
+      color: #ff3366;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <!-- Replace music.mp3 with your own romantic song file -->
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
 
   <!-- Page 1 -->
   <div class="page active" id="page1">
@@ -111,7 +150,8 @@
     </div>
   </div>
 
-  <!-- Page 2 -->
+
+  <!-- Page 2: Love Celebration -->
   <div class="page" id="page2">
     <h1>Yayyy! ❤️🥰</h1>
 
@@ -121,36 +161,87 @@
       You just made the best decision ever, my love 💕<br>
       Happy Valentine’s Day, Nisha 🌹
     </div>
+
+    <button class="nextBtn" onclick="goToGallery()">Next Surprise ➡️</button>
   </div>
+
+
+  <!-- Page 3: Photo Gallery -->
+  <div class="page" id="page3">
+    <h1>Our Beautiful Memories 📸❤️</h1>
+
+    <div class="gallery">
+      <!-- Replace these with your real photo file names -->
+      <img src="photo1.jpg" alt="Memory 1">
+      <img src="photo2.jpg" alt="Memory 2">
+      <img src="photo3.jpg" alt="Memory 3">
+      <img src="photo4.jpg" alt="Memory 4">
+    </div>
+
+    <button class="nextBtn" onclick="goToFinal()">Final Surprise 💝</button>
+  </div>
+
+
+  <!-- Page 4: Final Surprise -->
+  <div class="page" id="page4">
+    <h1>Forever & Always 💍❤️</h1>
+
+    <div class="message">
+      My dearest Nisha 💕,<br><br>
+      You are my happiness, my strength, and my forever.
+      Every moment with you is a blessing.
+      I promise to love you more every single day. 💖<br><br>
+      Thank you for being my Valentine,
+      today and always 🌹✨
+    </div>
+
+    <h2 style="margin-top:20px;">I Love You 😘❤️</h2>
+  </div>
+
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const page1 = document.getElementById("page1");
     const page2 = document.getElementById("page2");
+    const page3 = document.getElementById("page3");
+    const page4 = document.getElementById("page4");
+    const music = document.getElementById("bgMusic");
 
-    // Move No button when hovered
+    // Move No button
     noBtn.addEventListener("mouseover", moveButton);
     noBtn.addEventListener("click", moveButton);
 
     function moveButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 80);
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     }
 
-    // Yes button action
+    // Yes button
     yesBtn.addEventListener("click", () => {
       page1.classList.remove("active");
       page2.classList.add("active");
+      music.play();
       startConfetti();
     });
 
-    // Confetti effect
+    function goToGallery() {
+      page2.classList.remove("active");
+      page3.classList.add("active");
+    }
+
+    function goToFinal() {
+      page3.classList.remove("active");
+      page4.classList.add("active");
+      startConfetti();
+    }
+
+    // Confetti
     function startConfetti() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 120; i++) {
         const confetti = document.createElement("div");
         confetti.classList.add("confetti");
 
